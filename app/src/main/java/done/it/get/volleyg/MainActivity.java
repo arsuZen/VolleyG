@@ -5,20 +5,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import done.it.get.volleyg.model.WeatherData;
+
 import done.it.get.volleyg.utility.Constants;
+import done.it.get.volleyg.utility.DataFormat;
 import done.it.get.volleyg.utility.VolleyInstance;
 
 
@@ -62,11 +61,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             JSONArray towns = weatherData.getJSONObject(0).getJSONArray("town");
                             JSONArray town_GT = towns.getJSONObject(0).getJSONArray("town_GT");
                             JSONObject info = town_GT.getJSONObject(0).getJSONObject("info");
-                            Log.d("TEST", "info:"+info.toString());
+                            String input = town_GT.toString();
+                            Log.d("TEST", "input:" + input);
                             Gson gson = new Gson();
-                            WeatherData mData = gson.fromJson(info.toString(),WeatherData.class);
+//                            WeatherData mData = gson.fromJson(info.toString(),WeatherData.class);
+                            DataFormat.town_GT_inner[] mData = gson.fromJson(input, DataFormat.town_GT_inner[].class);
 
-                            tvResult.setText("Gson:"+mData.toString());
+                            tvResult.setText("Gson:" + mData[2].getcurrent().getDataTime());
 
 
                         } catch (JSONException e) {
