@@ -11,6 +11,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.StringTokenizer;
+
 import done.it.get.volleyg.utility.Constants;
 import done.it.get.volleyg.utility.VolleyInstance;
 
@@ -37,8 +43,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
+                                try {
+                                    JSONObject parent = new JSONObject(response);
+                                    JSONArray weatherData = parent.getJSONArray("WeatherData");
+                                    JSONArray town = weatherData.getJSONArray("Town");
 
-                                tvResult.setText("Result:"+response);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                tvResult.setText("Result:" + result);
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -54,4 +67,5 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onPause();
 
     }
+
 }

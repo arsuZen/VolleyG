@@ -5,4 +5,5 @@ package done.it.get.volleyg.utility;
  */
 public class Constants {
     public static String weatherUrl = "http://app.cwb.gov.tw/ws/feed5.php?userid=aphoneB42e6iCglJ2bY&type=A&townid=6700700";
+    public static String weatherUrlT = "http://app.cwb.gov.tw/ws/feed5.php?userid=aphoneB42e6iCglJ2bY&type=T";
 }
